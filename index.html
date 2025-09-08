@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Web Page</h1>
+        </header>
+
+        <section id="colorChanger">
+            <h2>Color Changer</h2>
+            <button id="changeColorBtn">Change Background Color</button>
+        </section>
+
+        <section id="counter">
+            <h2>Counter</h2>
+            <p>Count: <span id="countDisplay">0</span></p>
+            <button id="incrementBtn">Increment</button>
+            <button id="decrementBtn">Decrement</button>
+        </section>
+
+        <section id="formSection">
+            <h2>Registration Form</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                    <span class="error" id="usernameError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email">
+                    <span class="error" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                    <span class="error" id="passwordError"></span>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

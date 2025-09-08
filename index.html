@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
     <div class="container">
         <header>
             <h1>Interactive Web Page</h1>
+            <button id="themeToggle">Toggle Dark Mode</button>
         </header>
 
         <section id="colorChanger">
@@ -22,6 +23,23 @@
             <p>Count: <span id="countDisplay">0</span></p>
             <button id="incrementBtn">Increment</button>
             <button id="decrementBtn">Decrement</button>
+            <button id="resetBtn">Reset</button>
+        </section>
+
+        <section id="faqSection">
+            <h2>FAQ</h2>
+            <div class="faq-item">
+                <div class="faq-question">What is this page about?</div>
+                <div class="faq-answer">This page demonstrates various interactive JavaScript features.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How does the counter work?</div>
+                <div class="faq-answer">Click increment or decrement to change the number. Reset to start over.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I change the theme?</div>
+                <div class="faq-answer">Yes! Use the Toggle Dark Mode button at the top of the page.</div>
+            </div>
         </section>
 
         <section id="formSection">
@@ -31,18 +49,21 @@
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username">
                     <span class="error" id="usernameError"></span>
+                    <span class="requirements">Minimum 3 characters</span>
                 </div>
                 
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="text" id="email" name="email">
                     <span class="error" id="emailError"></span>
+                    <span class="requirements">Must be a valid email address</span>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password">
                     <span class="error" id="passwordError"></span>
+                    <span class="requirements">Minimum 6 characters, include numbers and letters</span>
                 </div>
 
                 <button type="submit">Submit</button>

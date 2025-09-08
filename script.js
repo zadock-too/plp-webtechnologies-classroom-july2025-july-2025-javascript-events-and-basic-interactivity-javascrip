@@ -1,3 +1,14 @@
+// Theme Toggle Feature
+// Implements light/dark mode switching
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', newTheme);
+});
+
 // Color Changer Feature
 // Changes the background color of the page randomly
 const changeColorBtn = document.getElementById('changeColorBtn');
@@ -7,24 +18,51 @@ changeColorBtn.addEventListener('click', () => {
 });
 
 // Counter Feature
-// Implements a simple counter with increment and decrement functionality
+// Implements a counter with increment, decrement, and reset functionality
 const countDisplay = document.getElementById('countDisplay');
 const incrementBtn = document.getElementById('incrementBtn');
 const decrementBtn = document.getElementById('decrementBtn');
+const resetBtn = document.getElementById('resetBtn');
 let count = 0;
 
 incrementBtn.addEventListener('click', () => {
     count++;
-    countDisplay.textContent = count;
+    updateCounter();
 });
 
 decrementBtn.addEventListener('click', () => {
     count--;
+    updateCounter();
+});
+
+resetBtn.addEventListener('click', () => {
+    count = 0;
+    updateCounter();
+});
+
+function updateCounter() {
     countDisplay.textContent = count;
+    countDisplay.style.color = count < 0 ? 'red' : count > 0 ? 'green' : 'black';
+}
+
+// FAQ Feature
+// Implements collapsible FAQ sections
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    answer.style.display = 'none';
+
+    question.addEventListener('click', () => {
+        const isOpen = answer.style.display === 'block';
+        answer.style.display = isOpen ? 'none' : 'block';
+        question.classList.toggle('active');
+    });
 });
 
 // Form Validation
-// Custom form validation with error messages
+// Enhanced custom form validation with real-time feedback
 const form = document.getElementById('registrationForm');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
@@ -34,37 +72,57 @@ const usernameError = document.getElementById('usernameError');
 const emailError = document.getElementById('emailError');
 const passwordError = document.getElementById('passwordError');
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let isValid = true;
+// Real-time validation
+username.addEventListener('input', () => validateUsername());
+email.addEventListener('input', () => validateEmail());
+password.addEventListener('input', () => validatePassword());
 
-    // Username validation
-    if (username.value.length < 3) {
+function validateUsername() {
+    const value = username.value.trim();
+    if (value.length < 3) {
         usernameError.textContent = 'Username must be at least 3 characters long';
-        isValid = false;
-    } else {
-        usernameError.textContent = '';
+        return false;
     }
+    usernameError.textContent = '✓';
+    usernameError.style.color = 'green';
+    return true;
+}
 
-    // Email validation
+function validateEmail() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value)) {
         emailError.textContent = 'Please enter a valid email address';
-        isValid = false;
-    } else {
-        emailError.textContent = '';
+        return false;
     }
+    emailError.textContent = '✓';
+    emailError.style.color = 'green';
+    return true;
+}
 
-    // Password validation
-    if (password.value.length < 6) {
-        passwordError.textContent = 'Password must be at least 6 characters long';
-        isValid = false;
-    } else {
-        passwordError.textContent = '';
+function validatePassword() {
+    const value = password.value;
+    const hasLetters = /[a-zA-Z]/.test(value);
+    const hasNumbers = /\d/.test(value);
+    
+    if (value.length < 6 || !hasLetters || !hasNumbers) {
+        passwordError.textContent = 'Password must be at least 6 characters and include both letters and numbers';
+        return false;
     }
+    passwordError.textContent = '✓';
+    passwordError.style.color = 'green';
+    return true;
+}
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const isValid = validateUsername() && validateEmail() && validatePassword();
 
     if (isValid) {
         alert('Form submitted successfully!');
         form.reset();
+        [usernameError, emailError, passwordError].forEach(error => {
+            error.textContent = '';
+            error.style.color = '';
+        });
     }
 });
